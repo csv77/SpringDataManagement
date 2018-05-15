@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -11,8 +12,13 @@ import com.zaxxer.hikari.HikariDataSource;
 public class SensorDataConfiguration {
 	
 	@Bean
-	public SensorDataDao sensorDataDao() {
-		return new SensorDataDaoImpl(dataSource());
+	public SensorDataDao sensorDataDao(JdbcTemplate jdbcTemplate) {
+		return new SensorDataDaoImpl(jdbcTemplate);
+	}
+	
+	@Bean
+	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+		return new JdbcTemplate(dataSource);
 	}
 	
 	@Bean 
@@ -21,7 +27,7 @@ public class SensorDataConfiguration {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("csabi");
 		dataSource.setPassword("ae293147");
-		dataSource.setJdbcUrl("jdbc:mysql://173.249.44.63/sajat?useSSL=false");
+		dataSource.setJdbcUrl("jdbc:mysql://localhost/sajat");
 		dataSource.setMinimumIdle(2);
 		dataSource.setMaximumPoolSize(5);
 		return dataSource;
