@@ -13,7 +13,9 @@ public class SensorDataConfiguration {
 	
 	@Bean
 	public SensorDataDao sensorDataDao(JdbcTemplate jdbcTemplate) {
-		return new SensorDataDaoImpl(jdbcTemplate);
+		SensorDataDaoImpl sensorDataDao = new SensorDataDaoImpl();
+		sensorDataDao.setJdbcTemplate(jdbcTemplate);
+		return sensorDataDao;
 	}
 	
 	@Bean
