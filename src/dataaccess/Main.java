@@ -1,6 +1,5 @@
 package dataaccess;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,27 +9,48 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(SensorDataConfiguration.class);
+//		ApplicationContext context = new AnnotationConfigApplicationContext(SensorDataConfiguration.class);
+//		
+//		SensorDataDao sensorDataDao = context.getBean(SensorDataDao.class);
+//		List<SensorData> sensorDataList = sensorDataDao.getAllSensorData();
+//		sensorDataList.forEach(System.out::println);
+//		
+//		System.out.println("\nOnly one record:\n" + sensorDataDao.getSensorData(5) + "\n\n");
+//		
+//		sensorDataList = new ArrayList<>();
+//		sensorDataList.add(new SensorData(11, new Date(), 42.5, 72.35));
+//		sensorDataList.add(new SensorData(12, new Date(), 32.2, 63.51));
+//		sensorDataList.add(new SensorData(13, new Date(), 27.8, 52.4));
+//		
+//		sensorDataDao.insert(sensorDataList);
+//		
+//		sensorDataList = sensorDataDao.getAllSensorData();
+//		sensorDataList.forEach(System.out::println);
+//		
+//		System.out.println("\nNumber of records in database: " + sensorDataDao.countRecord() + "\n");
+//		
+//		System.out.println("The temperature of 7th record is: " + sensorDataDao.selectTemp(7));
 		
-		SensorDataDao sensorDataDao = context.getBean(SensorDataDao.class);
-		List<SensorData> sensorDataList = sensorDataDao.getAllSensorData();
-		sensorDataList.forEach(System.out::println);
+		ApplicationContext context = new AnnotationConfigApplicationContext(SensorDataConfiguration2.class);
 		
-		System.out.println("\nOnly one record:\n" + sensorDataDao.getSensorData(5) + "\n\n");
+		SensorDataDao2 sensorDataDao2 = context.getBean(SensorDataDao2.class);
+		List<SensorData2> sensorData2List = sensorDataDao2.getAllSensorData();
 		
-		sensorDataList = new ArrayList<>();
-		sensorDataList.add(new SensorData(9, new Date(), 42.5, 72.35));
-		sensorDataList.add(new SensorData(10, new Date(), 32.2, 63.51));
-		sensorDataList.add(new SensorData(11, new Date(), 27.8, 52.4));
+		sensorData2List.forEach(System.out::println);
 		
-		sensorDataDao.insert(sensorDataList);
+		System.out.println("\nOnly one record:\n" + sensorDataDao2.getSensorData(5) + "\n\n");
 		
-		sensorDataList = sensorDataDao.getAllSensorData();
-		sensorDataList.forEach(System.out::println);
+		SensorData2 sensorData2 = new SensorData2();
+		sensorData2.setDate(new Date());
+		sensorData2.setTemperature(42.5);
+		sensorData2.setHumidity(72.35);
 		
-		System.out.println("\nNumber of records in database: " + sensorDataDao.countRecord() + "\n");
+		sensorDataDao2.store(sensorData2);
 		
-		System.out.println("The temperature of 7th record is: " + sensorDataDao.selectTemp(7));
+		sensorData2List = sensorDataDao2.getAllSensorData();
+		sensorData2List.forEach(System.out::println);
+		
+		System.out.println("\nThe 6th temperature is: " + String.format("%.2f", sensorDataDao2.getTemperature(6)));
 		
 		((AnnotationConfigApplicationContext)context).close();
 	}
