@@ -1,6 +1,8 @@
 package dataaccess;
 
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,7 +74,7 @@ public class SensorData2 {
 	@Override
 	public String toString() {
 		return "index: " + this.id + 
-				"\tdate: " + this.date.toString() +
+				"\tdate: " + DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.US).format(this.date) +
 				"\ttemperature: " + String.format("%.2f", this.temperature) + " C°" +
 				"\thumidity: " + String.format("%.2f", this.humidity) + " %";
 	}
