@@ -48,7 +48,6 @@ public class SensorDataConfiguration2 {
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.setProperty(AvailableSettings.DIALECT, MySQLDialect.class.getName());
-		properties.setProperty(AvailableSettings.SHOW_SQL, String.valueOf(true));
 		properties.setProperty(AvailableSettings.HBM2DDL_AUTO, "update");
 		return properties;
 	}
