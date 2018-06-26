@@ -30,19 +30,19 @@ public class SensorDataDao2Impl implements SensorDataDao2 {
 		session.delete(sensorData2);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public SensorData2 getSensorData(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(SensorData2.class, id);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<SensorData2> getAllSensorData() {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createQuery("from SensorData2", SensorData2.class).list();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Double getTemperature(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.createQuery("select temperature from SensorData2 S where S.id = " + id, Double.class).getSingleResult();
